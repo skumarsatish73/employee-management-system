@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OfficeDesk | Employee Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><span class="brand-icon">O</span><span>OfficeDesk<small>EMPLOYEE PORTAL</small></span></div>
+    <div class="nav-label">WORKSPACE</div>
+    <button class="nav-item active" data-page="dashboard"><span>▦</span> Dashboard</button>
+    <button class="nav-item" data-page="employees"><span>♙</span> Employees</button>
+    <button class="nav-item" data-page="attendance"><span>◷</span> Attendance</button>
+    <button class="nav-item" data-page="salary"><span>₹</span> Salary</button>
+    <button class="nav-item" data-page="leaves"><span>▤</span> Leave Requests</button>
+    <div class="sidebar-bottom"><div class="avatar">AD</div><div><b>Admin User</b><small>Administrator</small></div><button id="logoutBtn" title="Demo logout">↪</button></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="mobile-menu" id="menuBtn" aria-label="Toggle menu">☰</button>
+      <div class="breadcrumb">Workspace <span>/</span> <b id="crumb">Dashboard</b></div>
+      <div class="top-right"><span class="status-dot"></span><span class="online-text">Demo mode</span><div class="avatar small">AD</div></div>
+    </header>
+
+    <section class="page active-page" id="page-dashboard">
+      <div class="page-heading"><div><p class="eyebrow">OVERVIEW</p><h1>Good morning, Admin 👋</h1><p class="muted">Here's what's happening in your office today.</p></div><button class="primary-btn" id="quickAdd">＋ Add employee</button></div>
+      <div class="stat-grid">
+        <article class="stat-card"><div class="stat-top"><span>Total employees</span><span class="stat-icon purple">♙</span></div><strong id="statEmployees">24</strong><div class="stat-foot"><span class="trend">↗ Active records</span><span class="muted">This office</span></div></article>
+        <article class="stat-card"><div class="stat-top"><span>Present today</span><span class="stat-icon green">✓</span></div><strong id="statPresent">18</strong><div class="stat-foot"><span class="trend">Attendance</span><span class="muted">Today</span></div></article>
+        <article class="stat-card"><div class="stat-top"><span>Absent today</span><span class="stat-icon orange">◷</span></div><strong id="statAbsent">3</strong><div class="stat-foot"><span class="trend orange-text">Needs review</span><span class="muted">Today</span></div></article>
+        <article class="stat-card"><div class="stat-top"><span>Pending leaves</span><span class="stat-icon blue">▤</span></div><strong id="statLeaves">3</strong><div class="stat-foot"><span class="trend">Requests</span><span class="muted">Awaiting action</span></div></article>
+      </div>
+      <div class="content-grid">
+        <article class="panel"><div class="panel-heading"><div><h2>Recent employees</h2><p class="muted">Latest employee records</p></div><button class="text-btn" data-go="employees">View all →</button></div><div class="table-wrap"><table><thead><tr><th>EMPLOYEE</th><th>DEPARTMENT</th><th>STATUS</th></tr></thead><tbody id="recentEmployees"></tbody></table></div></article>
+        <article class="panel attendance-panel"><div class="panel-heading"><div><h2>Today's attendance</h2><p class="muted">Office attendance snapshot</p></div><span class="today-pill" id="todayPill"></span></div><div class="attendance-summary"><div class="donut"><div><strong id="attendancePercent">75%</strong><small>present</small></div></div><div class="legend"><p><i class="legend-dot green-bg"></i> Present <b id="legendPresent">18</b></p><p><i class="legend-dot orange-bg"></i> Absent <b id="legendAbsent">3</b></p><p><i class="legend-dot blue-bg"></i> On leave <b>3</b></p></div></div><button class="secondary-btn full-btn" data-go="attendance">Manage attendance</button></article>
+      </div>
+      <article class="panel quick-panel"><div class="panel-heading"><div><h2>Quick actions</h2><p class="muted">Common office tasks</p></div></div><div class="quick-actions"><button data-go="employees"><span>＋</span><b>Add employee</b><small>Create a new record</small></button><button data-go="attendance"><span>✓</span><b>Mark attendance</b><small>Update today's status</small></button><button data-go="salary"><span>₹</span><b>Salary records</b><small>View payroll details</small></button><button data-go="leaves"><span>▤</span><b>Review leaves</b><small>Approve or reject requests</small></button></div></article>
+    </section>
+
+    <section class="page" id="page-employees">
+      <div class="page-heading"><div><p class="eyebrow">PEOPLE DIRECTORY</p><h1>Employees</h1><p class="muted">Manage employee records in one place.</p></div><button class="primary-btn" id="addEmployeeBtn">＋ Add employee</button></div>
+      <article class="panel"><div class="toolbar"><div class="search-box"><span>⌕</span><input id="employeeSearch" placeholder="Search name, ID or department..."></div><span class="record-count" id="employeeCount">24 records</span></div><div class="table-wrap"><table><thead><tr><th>EMPLOYEE</th><th>EMPLOYEE ID</th><th>DEPARTMENT</th><th>DESIGNATION</th><th>MOBILE</th><th>ACTION</th></tr></thead><tbody id="employeeRows"></tbody></table></div></article>
+    </section>
+
+    <section class="page" id="page-attendance">
+      <div class="page-heading"><div><p class="eyebrow">DAILY RECORDS</p><h1>Attendance</h1><p class="muted">Update the attendance status for each employee.</p></div><span class="today-pill" id="attendanceDate"></span></div>
+      <article class="panel"><div class="toolbar"><div class="search-box"><span>⌕</span><input id="attendanceSearch" placeholder="Search employees..."></div><button class="secondary-btn" id="markAllPresent">Mark all present</button></div><div class="table-wrap"><table><thead><tr><th>EMPLOYEE</th><th>DEPARTMENT</th><th>STATUS</th></tr></thead><tbody id="attendanceRows"></tbody></table></div></article>
+    </section>
+
+    <section class="page" id="page-salary">
+      <div class="page-heading"><div><p class="eyebrow">PAYROLL</p><h1>Salary records</h1><p class="muted">Sample monthly salary information.</p></div><span class="today-pill">October 2026</span></div>
+      <article class="panel"><div class="toolbar"><div class="search-box"><span>⌕</span><input id="salarySearch" placeholder="Search employee..."></div><span class="record-count">Demo data</span></div><div class="table-wrap"><table><thead><tr><th>EMPLOYEE</th><th>BASIC SALARY</th><th>ALLOWANCE</th><th>DEDUCTION</th><th>NET SALARY</th><th>PAYMENT</th></tr></thead><tbody id="salaryRows"></tbody></table></div></article>
+      <p class="note">Demo only: salary values are sample figures, not real payroll data.</p>
+    </section>
+
+    <section class="page" id="page-leaves">
+      <div class="page-heading"><div><p class="eyebrow">TIME OFF</p><h1>Leave requests</h1><p class="muted">Review and update employee leave requests.</p></div></div>
+      <article class="panel"><div class="table-wrap"><table><thead><tr><th>EMPLOYEE</th><th>LEAVE TYPE</th><th>DATES</th><th>REASON</th><th>STATUS / ACTION</th></tr></thead><tbody id="leaveRows"></tbody></table></div></article>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="employeeModal" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-head"><div><p class="eyebrow">EMPLOYEE RECORD</p><h2 id="modalTitle">Add employee</h2></div><button class="icon-btn" id="closeModal" aria-label="Close">✕</button></div>
+      <form id="employeeForm">
+        <input type="hidden" id="editId">
+        <label>Full name *<input id="fullName" required maxlength="70" placeholder="e.g. Rahul Sharma"></label>
+        <div class="form-row"><label>Department *<select id="department" required><option value="">Select department</option><option>Administration</option><option>Accounts</option><option>Human Resources</option><option>IT Support</option><option>Operations</option><option>Sales</option></select></label><label>Designation *<input id="designation" required placeholder="e.g. Office Clerk"></label></div>
+        <div class="form-row"><label>Mobile number<input id="mobile" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="10 digit number"></label><label>Email<input id="email" type="email" placeholder="name@example.com"></label></div>
+        <label>Joining date<input id="joiningDate" type="date"></label>
+        <div class="modal-actions"><button type="button" class="secondary-btn" id="cancelModal">Cancel</button><button type="submit" class="primary-btn">Save employee</button></div>
+      </form>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
